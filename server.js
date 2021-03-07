@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser= require('body-parser');
 const mongoose=require('mongoose');
+const fetch = require('node-fetch');
 const app = express();
 mongoose.connect("mongodb+srv://Rehan:Alexa693@cluster0.2wzmd.mongodb.net/locationDB?retryWrites=true&writeConcern=majority/locationDB ",{ useUnifiedTopology: true }, { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true})) ;
@@ -92,34 +93,69 @@ app.get("/",function(req,res){
 res.render("SOS");
 })
 
-app.post("/",function(req,res){
-var lat=req.body.latitude;
-var lng=req.body.longitude;
+app.post("/",async function(req,res){
+	var lat=req.body.latitude;
+	var lng=req.body.longitude;
 
-var location=new Location({//SENDING COMMENT TO database
-		lat: lat,
-  	 lng: lng
- 	});
- location.save();
+	var location=new Location({//SENDING COMMENT TO database
+			lat: lat,
+		lng: lng
+		});
+	location.save();
+	// The API key for the reverse geocoding API is an environment variable
+	const APIKEY = process.env.POSITIONAPIKEY;
+	// Call the reverse GeoCoding API to get the location details
+	const locationResponse = await fetch(`http://api.positionstack.com/v1/reverse?access_key=${APIKEY}&query=${lat},${lng}`);
+	// Returns an array of all near by locations
+	const locationJSON = await locationResponse.json();
+	// Get the data array from the JSON
+	const locationData = locationJSON['data'];
+	
+	let locationName = "Unknown location";
+	let confidentIndex = 0;
+	let maxConfidence = 0;
+	// Each location returned by the API has a confidence level
+	// Loop through the API to find the most confident location.
+	for (let i=0; i<locationData.length; i++) {
+		if(locationData[i]['confidence']>maxConfidence) {
+			maxConfidence = locationData[i]['confidence'];
+			confidentIndex = i;
+		}
+	}
 
-console.log(lat +"    "+lng);
-res.render("index");
+	// Compute the name of the location using the details of the most confident location
+	if(locationData.length > 0) {
+		locationName = `${locationData[confidentIndex]['neighbourhood']} ,${locationData[confidentIndex]['locality']}, ${locationData[confidentIndex]['region']}, ${locationData[confidentIndex]['country']}`
+	}
+	const body = {
+		email: 'avinashupadhya99@gmail.com', // Email of the police officer
+		location: locationName
+	};
+	// Call novotize API to send email notification regarding the location
+	const emailResponse = await fetch('https://events-api.notivize.com/applications/9bd047c4-ad22-49d7-b3d3-dbfeed1a8b3d/event_flows/a01f0c7f-abd3-425a-baca-ae55ed489be4/events', {
+		method: 'post',
+		body: JSON.stringify(body),
+		headers: {'Content-Type': 'application/json'}
+	});
+
+	console.log(lat +"    "+lng);
+	res.render("index");
 })
 
 
 
-app.post("/location",function(req,res){
-var lat=req.body.latitude;
-var lng=req.body.longitude;
+app.post("/location", function(req,res){
+	var lat=req.body.latitude;
+	var lng=req.body.longitude;
 
-var location=new Location({//SENDING COMMENT TO database
-		lat: lat,
-  	 lng: lng
- 	});
- location.save();
+	var location=new Location({//SENDING COMMENT TO database
+			lat: lat,
+		lng: lng
+		});
+	location.save();
 
-console.log(lat +"    "+lng);
-res.render("index");
+	console.log(lat +"    "+lng);
+	res.render("index");
 })
 
 
