@@ -128,7 +128,7 @@ app.post("/",async function(req,res){
 		});
 	location.save();
 	// The API key for the reverse geocoding API is an environment variable
-	const APIKEY = 'cc9767f2a919fd55c218bf081e0f2ba6';
+	const APIKEY = 'API key';
 	// Call the reverse GeoCoding API to get the location details
 	const locationResponse = await fetch(`http://api.positionstack.com/v1/reverse?access_key=${APIKEY}&query=${lat},${lng}`);
 	// Returns an array of all near by locations
