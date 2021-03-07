@@ -128,7 +128,7 @@ app.post("/",async function(req,res){
 		});
 	location.save();
 	// The API key for the reverse geocoding API is an environment variable
-	const APIKEY = 'API key';
+	const APIKEY = process.env.POSITIONAPIKEY;
 	// Call the reverse GeoCoding API to get the location details
 	const locationResponse = await fetch(`http://api.positionstack.com/v1/reverse?access_key=${APIKEY}&query=${lat},${lng}`);
 	// Returns an array of all near by locations
@@ -150,7 +150,11 @@ app.post("/",async function(req,res){
 
 	// Compute the name of the location using the details of the most confident location
 	if(locationData.length > 0) {
-		locationName = `${locationData[confidentIndex]['neighbourhood']} ,${locationData[confidentIndex]['locality']}, ${locationData[confidentIndex]['region']}, ${locationData[confidentIndex]['country']}`
+		locationName = ""
+		locationName += locationData[confidentIndex]['neighbourhood'] ? `${locationData[confidentIndex]['neighbourhood']}, ` : "";
+		locationName += locationData[confidentIndex]['locality'] ? `${locationData[confidentIndex]['locality']}, ` : "";
+		locationName += `${locationData[confidentIndex]['region']}, `;
+		locationName += locationData[confidentIndex]['country'];
 	}
 	// console.log(locationName);
 
@@ -172,7 +176,7 @@ app.post("/",async function(req,res){
 		body: JSON.stringify(body),
 		headers: {'Content-Type': 'application/json'}
 	});
-
+	console.log(emailResponse);
 	console.log(lat +"    "+lng);
 	res.render("index");
 })
