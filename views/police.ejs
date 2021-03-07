@@ -22,6 +22,7 @@
 
   <div class="header">
 <h1 class="title">BESAFE : POLICE PROTECTION SERVER</h1>
+
 <img class="alarm a" src="https://media.giphy.com/media/qi29MoLjWNPUI/giphy.gif" alt="">
 </div>
 <h1 class="message">SEEMS LIKE A NICE DAY</h1>
@@ -59,11 +60,78 @@ terrain
 </div>
   <div id="map"></div>
 
-<div class="">
+<!-- <div class=""> -->
 
-</div>
+<table>
+  <tr>
+    <th><h2>VICTIMS CURRENT LOCATION :</h2></th>
+    <th><h2><%=address%></h2></th>
+
+  </tr>
+  <tr>
+    <td><h2>DISTANCE TRAVELLED FROM INITIAL POSITION :</h2></td>
+    <td><h2><%=distance%> meters</h2></td>
+
+  </tr>
+  <tr>
+    <td><h2>DISTANCE FROM POLICE STATION :</h2></td>
+    <td class="dist"> <h2>press get distance button above</h2></td>
+
+  </tr>
+</table>
+
+<footer>
+<h3>Made with <i class="fas fa-heart"></i> by team ZAPRR</h3>
+<a href="https://github.com/Abusayid693/SOS-Application">Source code<i class="fab fa-github"></i></a>
+</footer>
+
+
+
+<!-- </div> -->
 <!-- ==================CSS======================== -->
   <style media="screen">
+footer a{
+  text-decoration: none;
+  color: white;
+}
+footer a:hover{
+  color: #C492EC;
+
+}
+footer{
+  background-color: #48064E;
+  width: 100%;
+  height: 200px;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+
+
+
+
+
+
+
     #map {
       height: 90%;
       width: 90%;
@@ -307,6 +375,8 @@ var l=<%=vicitm_lng%>;
 	  var d = parseInt(R * c);
 
 document.querySelector(".loco").innerHTML="The distance between victim and police station is "+d+" meters";
+document.querySelector(".dist").innerHTML=d+" meters";
+
           });
       } else {
           alert("Sorry, your browser does not support HTML5 geolocation.");
