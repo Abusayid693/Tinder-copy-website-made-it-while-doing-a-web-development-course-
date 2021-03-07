@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+  <!-- //Map API -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+  <!-- //Map API -->
+
+</head>
+
+<body class="alert">
+  <div class="">
+
+  <div class="header">
+<h1 class="title">BESAFE : POLICE PROTECTION SERVER</h1>
+<img class="alarm a" src="https://media.giphy.com/media/qi29MoLjWNPUI/giphy.gif" alt="">
+</div>
+<h1 class="message">SEEMS LIKE A NICE DAY</h1>
+
+<div class="refresher" id="refresher" >
+Refresh
+</div>
+</div>
+
+<!-- <h1>The distance covered by victim is "<%=distance%>" meters </h1> -->
+<div class="police_button" id="police_button">
+ Get Distance
+</div>
+<h1 class="loco"></h1>
+<!-- <h1 class="loco" >The distance covered by victim is "<%=distance%>" meters </h1> -->
+<div class="buttons">
+<div class="map_button satellite" id="0">
+satellite
+</div>
+<div class="map_button  terrain" id="1">
+terrain
+</div>
+<div class="map_button  roadmap" id="2">
+ roadmap
+</div>
+</div>
+<h1 class="t" >The distance covered by victim is "<%=distance%>" meters </h1>
+<div class="hr">
+  <i class="fas fa-3x fa-map-marker"></i>
+  <div class="hr_l">
+
+  </div>
+  <i class="fas fa-4x fa-child"></i>
+
+</div>
+  <div id="map"></div>
+
+<div class="">
+
+</div>
+<!-- ==================CSS======================== -->
+  <style media="screen">
+    #map {
+      height: 90%;
+      width: 90%;
+      margin: 70px auto 200px auto;
+      border: 5px solid  #48064E;
+    }
+    .hr{
+      color: blue;
+      margin-left: 12%;
+    }
+    .fas{
+display: inline-block;
+    }
+    .hr_l{
+      width: 85%;
+      height: 8px;
+      background-color: #fd8c04;
+      border-radius: 24px;
+      display: inline-block;
+    }
+    .a{
+      opacity: 0;
+    }
+    .t{
+      width: 72%;
+      /* background-color: white; */
+      /* border-radius: 24px; */
+      border-left: 5px solid black;
+      border-right: 5px solid black;
+
+      cursor: pointer;
+    font-size: 27px;
+    font-family: 'Montserrat', sans-serif;
+      display: inline-block;
+    text-align: center;
+    margin-left: 15.3% ;
+    margin-bottom: -50px;
+    /* box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2); */
+    }
+    .alarm{
+      width: 11%;
+      /* height: 15%; */
+display: inline-block;
+margin-left: 42%;
+    }
+.map_button {
+  display: inline-block;
+  width: 250px;
+  height: 50px;
+  background-color: blue;
+  transition: all 0.3s ease 0s;
+ cursor: pointer;
+ font-family: 'Montserrat', sans-serif;
+
+ outline: none;
+ background: #C492EC;
+ border-radius: 24px;
+text-align: center;
+font-size: 2rem;
+color: white;
+margin-left: 30px;
+
+}
+.loco{
+  width: 1000px;
+  background-color: white;
+  border-radius: 24px;
+  cursor: pointer;
+font-size: 27px;
+font-family: 'Montserrat', sans-serif;
+  display: inline-block;
+text-align: center;
+box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+
+}
+.buttons{
+text-align: center;
+margin-top: 300px;
+margin-bottom: 100px;
+}
+.map_button:hover{
+
+box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+color: #fff;
+transform: translateY(-7px);
+}
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .alert{
+background-color:rgba(206, 190, 234, 0.5);
+    }
+    .police_button:hover{
+
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    transform: translateY(-7px);
+    }
+    .police_button{
+      display: inline-block;
+      width: 250px;
+      height: 50px;
+    background: #C492EC;
+      transition: all 0.3s ease 0s;
+     cursor: pointer;
+     outline: none;
+     margin-top: 60px;
+     font-size: 2rem;
+     font-family: 'Montserrat', sans-serif;
+     border-radius: 24px;
+     text-align: center;
+     color: white;
+
+    }
+    .refresher:hover{
+      box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      transform: translateY(-7px);
+    }
+
+
+
+.refresher{
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+background: #7868e6;
+  transition: all 0.3s ease 0s;
+ cursor: pointer;
+ outline: none;
+ margin-top: 60px;
+ font-size: 1.5rem;
+ font-family: 'Montserrat', sans-serif;
+ border-radius: 24px;
+ text-align: center;
+ color: white;
+ margin-left: 90%;
+ margin-top: -110px;
+}
+.title{
+  display: inline-block;
+}
+.message{
+  font-family: 'RocknRoll One', sans-serif;
+  color: white;
+}
+.header{
+  background-color: #440a67;
+  color: white;
+  font-family: 'RocknRoll One', sans-serif;
+  text-align: center;
+}
+  </style>
+
+
+
+
+
+
+  <!-- ==================================MAP JAVASCRIPT================================================================================================================ -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ibBiDfKVNgRBjNIg23Sw7MeuJXQp2v4&callback=initMap" type="text/javascript"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2ibBiDfKVNgRBjNIg23Sw7MeuJXQp2v4&callback=initMap" type="text/javascript" async></script>
+  <script type="text/javascript">
+  //Types of map
+  var l=["satellite","terrain","roadmap"];
+  var o=0;
+
+//CHANGING MAP TYPE on button click
+function buttonClick(){
+document.querySelector(".satellite").addEventListener("click",function(){
+o=this.id;
+initMap();
+})
+document.querySelector(".terrain").addEventListener("click",function(){
+o=this.id;
+initMap();
+})
+document.querySelector(".roadmap").addEventListener("click",function(){
+o=this.id;
+initMap();
+})
+}
+alertSystem();
+//=============================Alert Music System===========================================
+function alertSystem(){
+var t=<%=alert%>;
+if(t===1){
+  document.querySelector(".alarm").classList.remove("a");
+  setTimeout(function(){ document.querySelector(".alert").style.backgroundColor= "red"; }, 800);
+  setTimeout(function(){ document.querySelector(".alert").style.backgroundColor= "black"; }, 1400);
+// document.querySelector(".alert").style.backgroundColor= "rgba(206, 190, 234, 0.5)";
+setTimeout(function(){ document.querySelector(".alert").style.backgroundColor= "red"; }, 2000);
+setTimeout(function(){ document.querySelector(".alert").style.backgroundColor= "rgba(206, 190, 234, 0.5)"; },2500);
+document.querySelector(".message").innerHTML="Get to work Someone is in trouble";
+
+}
+else{
+  alert("No criminal cases nearby found");
+}
+}
+
+// alertSystem();
+
+
+
+function refresher(){
+  document.querySelector("#refresher").addEventListener("click",function(){
+  window.location.reload();
+})
+}
+
+refresher();
+
+
+// ================getDistanceBetweenPoliceAndVictim===============
+function getDistanceBetweenPoliceAndVictim(){
+document.querySelector(".police_button").addEventListener("click",function(){
+      if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+var a=position.coords.latitude;
+var b=position.coords.longitude;
+
+//===========calculating distance between victim and nearest police station
+var k=<%=vicitm_lat%>;
+var l=<%=vicitm_lng%>;
+
+  var rad = function(x) {
+	  return x * Math.PI / 180;
+	};
+	  var R = 6378137; // Earth’s mean radius in meter
+	  var dLat = rad(k-a);
+	  var dLong = rad(l - b);
+	  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+	    Math.cos(rad(a)) * Math.cos(rad(k)) *
+	    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+	  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	  var d = parseInt(R * c);
+
+document.querySelector(".loco").innerHTML="The distance between victim and police station is "+d+" meters";
+          });
+      } else {
+          alert("Sorry, your browser does not support HTML5 geolocation.");
+      }
+})
+}
+getDistanceBetweenPoliceAndVictim();
+
+// ============MAP FUNCTIONS============
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: <%=zoom%>,
+        mapTypeId: l[o],
+        center: {
+          lat: <%=lat%> , //victims current location BY EJS
+          lng: <%=lng%>//victims current location BY EJS
+        },
+
+      });
+      const labels = "A";
+
+      const markers = locations.map((location, i) => {
+        return new google.maps.Marker({
+          position: location,
+          label: labels[i % labels.length],
+        });
+      });
+      new MarkerClusterer(map, markers, {
+        imagePath:
+
+          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+      });
+
+      var flightPlanCoordinates = [{
+          lat: <%=start_lat%> , //victims current location BY EJS
+          lng: <%=start_lng%>  //victims current location BY EJS
+
+        },
+        {
+          lat: <%=end_lat%> , //victims current location BY EJS
+          lng: <%=end_lng%> //victims current location BY EJS
+        },
+      ];
+
+
+      const flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: "#fd8c04",
+        strokeOpacity: 2.0,
+        strokeWeight: 5,
+      });
+      flightPath.setMap(map);
+    }
+    const locations = [{
+      lat: <%=lat_c%> ,
+      lng: <%=lng_c%>
+
+    }, ];
+  buttonClick();
+  </script>
+
+</body>
+
+</html>

