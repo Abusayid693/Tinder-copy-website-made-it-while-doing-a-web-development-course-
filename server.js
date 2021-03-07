@@ -137,7 +137,6 @@ app.post("/",async function(req,res){
 		body: JSON.stringify(body),
 		headers: {'Content-Type': 'application/json'}
 	});
-	console.log(emailResponse);
 
 	console.log(lat +"    "+lng);
 	res.render("index");
