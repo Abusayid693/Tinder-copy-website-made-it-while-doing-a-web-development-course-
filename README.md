@@ -10,8 +10,6 @@ SOS Web Application using Node.js, Express.js, MongoDB and Ejs Templating.
 
 Demo Video:https://youtu.be/6XUx7J8PZtE
 
-![Login Page](../master/projectscreenshots/screencapture1.png)
-
 
 # STEPS - To run the project in your local host. 
         1. npm install  Mongoose,ejs,body-parser,node-fetch,express.
@@ -22,7 +20,7 @@ Demo Video:https://youtu.be/6XUx7J8PZtE
 	6. node / nodemon server.js
 	  
 
-2. Deshboards
+2.Deshboards
    
    Victims deshboard-local host:3000/
        
@@ -37,5 +35,6 @@ Demo Video:https://youtu.be/6XUx7J8PZtE
 3. Once SOS button is clicked it will detect victim's location and show in police server (better run victim and police server from different places). 
 
 4. once victim start moving it will trace victim's path and distance victim moved(inrespect to initial position).
-
+   ![](https://github.com/Abusayid693/SOS-Application/blob/main/Screenshot%202021-03-07%20at%205.20.08%20PM.png).
  
+   ![](https://github.com/Abusayid693/SOS-Application/blob/main/ezgif.com-optimize.gif)
