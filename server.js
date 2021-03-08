@@ -3,7 +3,7 @@ const bodyParser= require('body-parser');
 const mongoose=require('mongoose');
 const fetch = require('node-fetch');
 const app = express();
-mongoose.connect("mongodb+srv://Rehan:Alexa693@cluster0.2wzmd.mongodb.net/locationDB?retryWrites=true&writeConcern=majority/locationDB ",{ useUnifiedTopology: true }, { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://-------MONGO ATLAS----/locationDB?retryWrites=true&writeConcern=majority/locationDB ",{ useUnifiedTopology: true }, { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true})) ;
 app.set('view engine','ejs');
 app.use(express.static("assets"));
@@ -127,7 +127,7 @@ app.post("/",async function(req,res){
 		lng: lng
 		});
 	location.save();
-	// The API key for the reverse geocoding API is an environment variable
+	// The API key for the reverse geocoding API is an environment variable (POSITION STACK)
 	const APIKEY = process.env.POSITIONAPIKEY;
 	// Call the reverse GeoCoding API to get the location details
 	const locationResponse = await fetch(`http://api.positionstack.com/v1/reverse?access_key=${APIKEY}&query=${lat},${lng}`);
@@ -167,7 +167,7 @@ app.post("/",async function(req,res){
 	register.save();
 
 	const body = {
-		email: 'abusayid693@gmail.com', // Email of the police officer
+		email: 'YOUR EMAIL', // Email of the police officer
 		location: locationName
 	};
 	// Call novotize API to send email notification regarding the location
